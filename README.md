@@ -55,9 +55,9 @@ swarm join \
 
 Now it's time to run the containers!
 ```
-docker service create --name flask -p 5000:5000 --network python-api henridwyer/papis_python_api
+docker service create --name flask -p 5000:5000 --network python-api jediv/papis_python_api
 docker service create --name redis --network python-api redis:alpine
-docker service create --name celery  -e "CELERY_WORKER=true" -e "C_FORCE_ROOT=True" --network python-api henridwyer/papis_python_api celery worker -A predict_celery:celery -l DEBUG -c 1
+docker service create --name celery  -e "CELERY_WORKER=true" -e "C_FORCE_ROOT=True" --network python-api jediv/papis_python_api celery worker -A predict_celery:celery -l DEBUG -c 1
 ```
 
 ## Benchmarks
@@ -80,17 +80,17 @@ Now let's push our app container to a docker registry
 
 ```
 docker login
-docker tag app henridwyer/papis_python_api
-docker push henridwyer/papis_python_api
+docker tag app jediv/papis_python_api
+docker push jediv/papis_python_api
 ```
 
 Finally, we start the app on the docker machine.
 
 ```
 docker network create python-api
-docker run --name flask -d -p 5000:5000 --network python-api henridwyer/papis_python_api
+docker run --name flask -d -p 5000:5000 --network python-api jediv/papis_python_api
 docker run --name redis -d --network python-api redis:alpine
-docker run --name celery -d -e "CELERY_WORKER=true" -e "C_FORCE_ROOT=True" --network python-api henridwyer/papis_python_api celery worker -A predict_celery:celery -l DEBUG -c 1
+docker run --name celery -d -e "CELERY_WORKER=true" -e "C_FORCE_ROOT=True" --network python-api jediv/papis_python_api celery worker -A predict_celery:celery -l DEBUG -c 1
 ```
 
 ## Benchmarks
@@ -103,22 +103,26 @@ ab -n 10 -p data.json -T application/json 127.0.0.1:5000/predict
 # Version 3 - Docker
 
 Create shared network:
+
 ```
 docker network create python-api
 ```
 
 Build and start the webserver container:
+
 ```
 docker build -t app app
 docker run --rm -p 5000:5000 --network python-api --name flask app
 ```
 
 Start the redis container:
+
 ```
 docker run --rm --network python-api --name redis redis:alpine
 ```
 
 Start the celery worker:
+
 ```
 docker run --rm -e "CELERY_WORKER=true" -e "C_FORCE_ROOT=True" --network python-api --name celery app celery worker -A predict_celery:celery -l DEBUG -c 3
 ```
