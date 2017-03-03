@@ -1,0 +1,50 @@
+This is ApacheBench, Version 2.3 <$Revision: 1748469 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 104.236.221.231 (be patient)...This is ApacheBench, Version 2.3 <$Revision: 1748469 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 104.236.221.231 (be patient).....done
+
+
+Server Software:        gunicorn/19.6.0
+Server Hostname:        104.236.221.231
+Server Port:            5000
+
+Document Path:          /predict
+Document Length:        48 bytes
+
+Concurrency Level:      10
+Time taken for tests:   4.694 seconds
+Complete requests:      10
+Failed requests:        0
+Total transferred:      2000 bytes
+Total body sent:        2330
+HTML transferred:       480 bytes
+Requests per second:    2.13 [#/sec] (mean)
+Time per request:       4694.334 [ms] (mean)
+Time per request:       469.433 [ms] (mean, across all concurrent requests)
+Transfer rate:          0.42 [Kbytes/sec] received
+                        0.48 kb/s sent
+                        0.90 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:     2925 2928   2.0   2927    2930
+Processing:   912 1494 327.6   1763    1768
+Waiting:      902 1492 330.5   1763    1768
+Total:       3838 4421 328.1   4693    4694
+
+Percentage of the requests served within a certain time (ms)
+  50%   4693
+  66%   4693
+  75%   4694
+  80%   4694
+  90%   4694
+  95%   4694
+  98%   4694
+  99%   4694
+ 100%   4694 (longest request)
+Total of 259 requests completed

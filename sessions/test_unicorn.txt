@@ -1,0 +1,87 @@
+This is ApacheBench, Version 2.3 <$Revision: 1748469 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)...This is ApacheBench, Version 2.3 <$Revision: 1748469 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient).....done
+
+
+Server Software:        gunicorn/19.6.0
+Server Hostname:        127.0.0.1
+Server Port:            5000
+
+Document Path:          /
+Document Length:        26 bytes
+
+Concurrency Level:      10
+Time taken for tests:   3.609 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      178000 bytes
+HTML transferred:       26000 bytes
+Requests per second:    277.10 [#/sec] (mean)
+Time per request:       36.087 [ms] (mean)
+Time per request:       3.609 [ms] (mean, across all concurrent requests)
+Transfer rate:          48.17 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.4      0      10
+Processing:     1   36 276.1      8    2787
+Waiting:        1   36 276.2      8    2786
+Total:          3   36 276.2      8    2787
+
+Percentage of the requests served within a certain time (ms)
+  50%      8
+  66%      8
+  75%      9
+  80%      9
+  90%      9
+  95%      9
+  98%     10
+  99%   2777
+ 100%   2787 (longest request)
+..done
+
+
+Server Software:        gunicorn/19.6.0
+Server Hostname:        127.0.0.1
+Server Port:            5000
+
+Document Path:          /predict
+Document Length:        46 bytes
+
+Concurrency Level:      10
+Time taken for tests:   3.820 seconds
+Complete requests:      10
+Failed requests:        0
+Total transferred:      1980 bytes
+Total body sent:        2310
+HTML transferred:       460 bytes
+Requests per second:    2.62 [#/sec] (mean)
+Time per request:       3819.946 [ms] (mean)
+Time per request:       381.995 [ms] (mean, across all concurrent requests)
+Transfer rate:          0.51 [Kbytes/sec] received
+                        0.59 kb/s sent
+                        1.10 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       1
+Processing:   959 2066 959.7   1903    3819
+Waiting:      959 2065 959.7   1902    3819
+Total:        960 2066 959.6   1903    3819
+
+Percentage of the requests served within a certain time (ms)
+  50%   1903
+  66%   2742
+  75%   2777
+  80%   2783
+  90%   3819
+  95%   3819
+  98%   3819
+  99%   3819
+ 100%   3819 (longest request)
