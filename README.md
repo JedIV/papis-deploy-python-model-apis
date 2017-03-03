@@ -55,9 +55,9 @@ swarm join \
 
 Now it's time to run the containers!
 ```
-docker service create --name flask -p 5000:5000 --network python-api henridwyer/papis_python_api
+docker service create --name flask -p 5000:5000 --network python-api jediv/papis_python_api
 docker service create --name redis --network python-api redis:alpine
-docker service create --name celery  -e "CELERY_WORKER=true" -e "C_FORCE_ROOT=True" --network python-api henridwyer/papis_python_api celery worker -A predict_celery:celery -l DEBUG -c 1
+docker service create --name celery  -e "CELERY_WORKER=true" -e "C_FORCE_ROOT=True" --network python-api jediv/papis_python_api celery worker -A predict_celery:celery -l DEBUG -c 1
 ```
 
 ## Benchmarks
@@ -80,17 +80,17 @@ Now let's push our app container to a docker registry
 
 ```
 docker login
-docker tag app henridwyer/papis_python_api
-docker push henridwyer/papis_python_api
+docker tag app jediv/papis_python_api
+docker push jediv/papis_python_api
 ```
 
 Finally, we start the app on the docker machine.
 
 ```
 docker network create python-api
-docker run --name flask -d -p 5000:5000 --network python-api henridwyer/papis_python_api
+docker run --name flask -d -p 5000:5000 --network python-api jediv/papis_python_api
 docker run --name redis -d --network python-api redis:alpine
-docker run --name celery -d -e "CELERY_WORKER=true" -e "C_FORCE_ROOT=True" --network python-api henridwyer/papis_python_api celery worker -A predict_celery:celery -l DEBUG -c 1
+docker run --name celery -d -e "CELERY_WORKER=true" -e "C_FORCE_ROOT=True" --network python-api jediv/papis_python_api celery worker -A predict_celery:celery -l DEBUG -c 1
 ```
 
 ## Benchmarks
@@ -244,13 +244,13 @@ Add the profiler to the app, and then run a prediction and look at the profiler 
    List reduced from 381 to 30 due to restriction <30>
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.000    0.000    0.832    0.832 /Users/henri/projects/papis_talk/api_env/lib/python2.7/site-packages/werkzeug/contrib/profiler.py:95(runapp)
-        1    0.000    0.000    0.832    0.832 /Users/henri/projects/papis_talk/api_env/lib/python2.7/site-packages/flask/app.py:1958(wsgi_app)
-        1    0.000    0.000    0.832    0.832 /Users/henri/projects/papis_talk/api_env/lib/python2.7/site-packages/flask/app.py:1627(full_dispatch_request)
-        1    0.000    0.000    0.831    0.831 /Users/henri/projects/papis_talk/api_env/lib/python2.7/site-packages/flask/app.py:1605(dispatch_request)
-        1    0.000    0.000    0.831    0.831 /Users/henri/projects/papis_talk/api.py:15(predict_api)
-        1    0.000    0.000    0.831    0.831 /Users/henri/projects/papis_talk/api.py:22(predict_text)
-      2/1    0.000    0.000    0.831    0.831 /Users/henri/projects/papis_talk/api_env/lib/python2.7/site-packages/sklearn/utils/metaestimators.py:37(<lambda>)
+        1    0.000    0.000    0.832    0.832 /Users/jediv/projects/papis_talk/api_env/lib/python2.7/site-packages/werkzeug/contrib/profiler.py:95(runapp)
+        1    0.000    0.000    0.832    0.832 /Users/jediv/projects/papis_talk/api_env/lib/python2.7/site-packages/flask/app.py:1958(wsgi_app)
+        1    0.000    0.000    0.832    0.832 /Users/jediv/projects/papis_talk/api_env/lib/python2.7/site-packages/flask/app.py:1627(full_dispatch_request)
+        1    0.000    0.000    0.831    0.831 /Users/jediv/projects/papis_talk/api_env/lib/python2.7/site-packages/flask/app.py:1605(dispatch_request)
+        1    0.000    0.000    0.831    0.831 /Users/jediv/projects/papis_talk/api.py:15(predict_api)
+        1    0.000    0.000    0.831    0.831 /Users/jediv/projects/papis_talk/api.py:22(predict_text)
+      2/1    0.000    0.000    0.831    0.831 /Users/jediv/projects/papis_talk/api_env/lib/python2.7/site-packages/sklearn/utils/metaestimators.py:37(<lambda>)
 ```
 
 Nearly all of the request time takes place in the ```predict_text``` function!
